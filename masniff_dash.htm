@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv=\"content-type\" content=\"text/html; charset=ISO-8859-2\">
+    <title>
+        mSniff Dashboard
+    </title>
+    <style>;
+        html {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e3e3e3;
+        }
+
+        body {
+            background-color: #292929;
+        }
+
+        section {
+            background-color: #4a4a4a;
+            display: grid;
+            justify-content: left;
+            align-content: center;
+            width: 500px;
+            height: 100%;
+            padding: 10px 10px 10px 10px;
+            margin: 10px;
+        }
+
+        h1 {
+            padding: 10px;
+        }
+        form  { 
+            display: table;      
+        }
+        
+        p     { 
+            display: table-row;  
+        }
+        
+        label { 
+            display: table-cell; 
+            padding-right: 10px;
+        }
+        
+        input { 
+            display: table-cell; 
+        }
+        
+        input[type=\"text\"]:disabled {
+            background: #4a4a4a;
+            color: #ffffff;
+            font-size: medium;
+        }
+        
+        input[type=\"text\"] {
+            font-size: medium;
+        }
+
+        input[type=\"submit\"] {
+            font-size: medium;  
+            width: 70px;   
+        }
+    </style>
+    </head><body>
+        <h1>mSniff Dashboard</h1>
+        <section>
+                <h2>Network</h2>
+
+                <form id=\"form_network\">
+                    <p>
+                        <label for=\"dhcp\">DHCP</label>
+                        <input type=\"radio\" id=\"dhcp\" name=\"network_radio\" value=\"DHCP\" checked=\"checked\">
+                    </p>
+                    <p>
+                        <label for=\"static\">Static</label>
+                        <input type=\"radio\" id=\"static\" name=\"network_radio\" value=\"STATIC\">
+                    </p>    
+                    <br>
+                    <p>
+                        <label for=\"mac_add\">MAC address</label> 
+                        <input type=\"text\" id=\"ip_add\" name=\"network_input_mac\" value=\"00-00-00-11-22-33\" disabled=\"disabled\">
+                    </p>
+                    <p>
+                        <label for=\"ip_add\"> IP address</label> 
+                        <input type=\"text\" id=\"ip_add\" name=\"network_input\" value=\"192.168.1.128\" disabled=\"disabled\">
+                    </p>
+                    <p>
+                        <label for=\"gate_add\">Gateway IP address</label>
+                        <input type=\"text\" id=\"gate_add\" name=\"network_input\" value=\"192.168.1.1\" disabled=\"disabled\">
+                    </p>
+                    <p>
+                        <label for=\"sub_mask\">Subnet mask</label>
+                        <input type=\"text\" id=\"sub_mask\" name=\"network_input\" value=\"255.255.255.0\" disabled=\"disabled\">
+                    </p>
+                    <br>
+                    <p>
+                        <input type=\"submit\" id=\"sub\" value=\"Refresh\">
+                    </p>    
+                </form>   
+                <script>
+                    const dhcp_radios = document.querySelectorAll('input[name=\"network_radio\"]');
+                    for (const radio of dhcp_radios) {
+                        radio.addEventListener('change', () => {
+                            document.querySelectorAll('input[name=\"network_input\"]').forEach(element => {
+                                element.disabled = document.getElementById(\"dhcp\").checked;
+                            });
+                        })
+                    }
+                </script>
+        </section>
+        <section>
+            <h2>Remote Target</h2>
+            <form>
+                <p>
+                    <label for=\"target_ip\">Target IP address</label>
+                    <input type=\"text\" id=\"target_ip\" value=\"192.168.1.2\">
+                </p>
+                <br>
+                <p>
+                    <input type=\"submit\" id=\"target_submit\" value=\"Set\">
+                </p>
+            </form>
+        </section>
+        
+        <section>
+            <h2>RF</h2>
+            //v�b�r protkolu (BLE/802.15.4), tla��tka start a stop
+        </section>
+        <section>
+            <h2>Stats</h2>
+            //po�et �sp�n� a ne�sp�n� p�ijat�ch paket�, last RSSI apod.<br>
+            //krmit to bude ka�dou vte�inu websocket
+        </section>
+        <section>
+            <h2>Analysis</h2>
+            //grafy (jestli zbyde �as)
+        </section>
+    
+
+
+</body></html>
