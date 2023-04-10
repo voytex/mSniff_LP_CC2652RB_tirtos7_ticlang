@@ -27,12 +27,17 @@
 
 uint8_t thisMac_byte[]    = {0x00, 0x00, 0x00, 0xA1, 0xB2, 0xC3};
 char    thisMac_char[MAC_MAX_SIZE];
-char    thisIp_char[IP_MAX_SIZE]   = "192.168.5.23";
-char    targetIp_char[IP_MAX_SIZE] = "192.168.5.12";
+
+char    pThisIp[IP_MAX_SIZE]   = "192.168.5.23";
+char    pTargetIp[IP_MAX_SIZE] = "192.168.5.12";
+char    pGatewayIp[IP_MAX_SIZE];
+char    pMask[IP_MAX_SIZE];
 
 uint8_t response_mac[6];
+
 IPAddress   hThisIp;
 IPAddress   hTargetIp;
+
 
 EthernetUDP hEthUdp;
 
@@ -50,8 +55,8 @@ void* Ethernet_mainTask(UArg a0, UArg a1)
 
 
     System_printf("ETH START\n");
-    IPAddress_fromString((IPAddress*)&hThisIp, thisIp_char);
-    IPAddress_fromString((IPAddress*)&hTargetIp, targetIp_char);
+    IPAddress_fromString((IPAddress*)&hThisIp, pThisIp);
+    IPAddress_fromString((IPAddress*)&hTargetIp, pTargetIp);
     Ethernet_begin_mac_ip(thisMac_byte, hThisIp);
     Semaphore_post(sem_ethernetInit);
 
@@ -86,21 +91,20 @@ void Ethernet_setTargetIp(char* newTargetIp)
     bReadyToSend = false;
     EthernetUDP_stop(&hEthUdp);
     IPAddress_fromString((IPAddress*)&hTargetIp, newTargetIp);
-    memset(targetIp_char, 0, IP_MAX_SIZE);
-    // TODO: copies a portion of "HTTP" as well!
-    strcpy(targetIp_char, newTargetIp);
+    memset(pTargetIp, 0, IP_MAX_SIZE);
+    strcpy(pTargetIp, newTargetIp);
     EthernetUDP_begin(&hEthUdp, PORT);
     bReadyToSend = true;
 }
 
 char* Ethernet_getTargetIp()
 {
-    return targetIp_char;
+    return pTargetIp;
 }
 
 char* Ethernet_getThisIp()
 {
-    return thisIp_char;
+    return pThisIp;
 }
 
 char* Ethernet_getThisMac()
@@ -110,6 +114,36 @@ char* Ethernet_getThisMac()
             thisMac_byte[3], thisMac_byte[4], thisMac_byte[5]);
     return thisMac_char;
 }
+
+char* Ethernet_getGatewayIp()
+{
+    IPAddress tmpIp = Ethernet_gatewayIP();
+    IPAddress_toString(tmpIp, pGatewayIp);
+    return pGatewayIp;
+}
+
+char* Ethernet_getMask()
+{
+    IPAddress tmpMsk = Ethernet_subnetMask();
+    IPAddress_toString(tmpMsk, pMask);
+    return pMask;
+}
+
+void Ethernet_startSniffing()
+{
+    bReadyToSend = true;
+}
+
+void Ethernet_stopSniffing()
+{
+    bReadyToSend = false;
+}
+
+bool Ethernet_getSniffingStatus()
+{
+    return bReadyToSend;
+}
+
 
 
 

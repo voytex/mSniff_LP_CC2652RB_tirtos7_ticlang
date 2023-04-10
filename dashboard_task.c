@@ -127,10 +127,13 @@ void handleHttp(EthernetClient* hEthClient, char* read_buffer) {
     //...<section> Network Info
     EthernetClient_println(hEthClient,
                            Html_sectionNetworkInfo(Ethernet_getThisMac(),
-                                                   Ethernet_getThisIp(), "NULL\0", "NULL\0"));
+                                                   Ethernet_getThisIp(),
+                                                   Ethernet_getGatewayIp(),
+                                                   Ethernet_getMask()));
     //...<section> Remote Target
     EthernetClient_println(hEthClient,
-                           Html_sectionRemoteTarget((const char*)Ethernet_getTargetIp()));
+                           Html_sectionRemoteTarget((const char*)Ethernet_getTargetIp(),
+                                                    Ethernet_getSniffingStatus()));
 
     //...<script>
     EthernetClient_println(hEthClient, Html_script());
@@ -146,6 +149,11 @@ void handleParameterChange(char* parameter, char* value) {
     if (strcmp(parameter, "target_ip") == 0)
     {
         Ethernet_setTargetIp(value);
+    }
+    if (strcmp(parameter, "run") == 0)
+    {
+        if (*value == '1') Ethernet_startSniffing();
+        if (*value == '0') Ethernet_stopSniffing();
     }
 }
 

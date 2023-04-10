@@ -9,7 +9,7 @@
 #define HTML_H_
 
 
-char* Html_sectionRemoteTarget(const char*);
+char* Html_sectionRemoteTarget(const char*, bool);
 char* Html_sectionNetworkInfo(const char*, const char*, const char*, const char*);
 const char* Html_preamble();
 const char* Html_head();

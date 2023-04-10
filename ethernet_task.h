@@ -16,6 +16,11 @@ void  Ethernet_setTargetIp(char*);
 char* Ethernet_getTargetIp(void);
 char* Ethernet_getThisIp(void);
 char* Ethernet_getThisMac(void);
+char* Ethernet_getGatewayIp(void);
+char* Ethernet_getMask(void);
+void  Ethernet_startSniffing(void);
+void  Ethernet_stopSniffing(void);
+bool  Ethernet_getSniffingStatus(void);
 
 
 
