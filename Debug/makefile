@@ -12,6 +12,7 @@ GEN_CMDS__FLAG :=
 ORDERED_OBJS += \
 "./dashboard_task.o" \
 "./ethernet_task.o" \
+"./html.o" \
 "./syscfg/ti_devices_config.o" \
 "./syscfg/ti_radio_config.o" \
 "./syscfg/ti_drivers_config.o" \
@@ -188,8 +189,8 @@ mSniff_LP_CC2652RB_tirtos7_ticlang.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(GEN_MISC_FILES__QUOTED)$(BIN_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "dashboard_task.o" "ethernet_task.o" "syscfg\ti_devices_config.o" "syscfg\ti_radio_config.o" "syscfg\ti_drivers_config.o" "syscfg\ti_sysbios_config.o" "main.o" "radio_queue.o" "radio_task.o" "ethernet\ArduinoCompatibility.o" "ethernet\Dhcp.o" "ethernet\Dns.o" "ethernet\Ethernet.o" "ethernet\EthernetBonjour.o" "ethernet\EthernetClient.o" "ethernet\EthernetServer.o" "ethernet\EthernetUdp.o" "ethernet\EthernetUtil.o" "ethernet\IPAddress.o" "ethernet\Printfg.o" "ethernet\SPIfg.o" "ethernet\Serial.o" "ethernet\UnitTest.o" "ethernet\socket.o" "ethernet\w5500.o" "websocket\WebsocketServer.o" 
-	-$(RM) "dashboard_task.d" "ethernet_task.d" "syscfg\ti_devices_config.d" "syscfg\ti_radio_config.d" "syscfg\ti_drivers_config.d" "syscfg\ti_sysbios_config.d" "main.d" "radio_queue.d" "radio_task.d" "ethernet\ArduinoCompatibility.d" "ethernet\Dhcp.d" "ethernet\Dns.d" "ethernet\Ethernet.d" "ethernet\EthernetBonjour.d" "ethernet\EthernetClient.d" "ethernet\EthernetServer.d" "ethernet\EthernetUdp.d" "ethernet\EthernetUtil.d" "ethernet\IPAddress.d" "ethernet\Printfg.d" "ethernet\SPIfg.d" "ethernet\Serial.d" "ethernet\UnitTest.d" "ethernet\socket.d" "ethernet\w5500.d" "websocket\WebsocketServer.d" 
+	-$(RM) "dashboard_task.o" "ethernet_task.o" "html.o" "syscfg\ti_devices_config.o" "syscfg\ti_radio_config.o" "syscfg\ti_drivers_config.o" "syscfg\ti_sysbios_config.o" "main.o" "radio_queue.o" "radio_task.o" "ethernet\ArduinoCompatibility.o" "ethernet\Dhcp.o" "ethernet\Dns.o" "ethernet\Ethernet.o" "ethernet\EthernetBonjour.o" "ethernet\EthernetClient.o" "ethernet\EthernetServer.o" "ethernet\EthernetUdp.o" "ethernet\EthernetUtil.o" "ethernet\IPAddress.o" "ethernet\Printfg.o" "ethernet\SPIfg.o" "ethernet\Serial.o" "ethernet\UnitTest.o" "ethernet\socket.o" "ethernet\w5500.o" "websocket\WebsocketServer.o" 
+	-$(RM) "dashboard_task.d" "ethernet_task.d" "html.d" "syscfg\ti_devices_config.d" "syscfg\ti_radio_config.d" "syscfg\ti_drivers_config.d" "syscfg\ti_sysbios_config.d" "main.d" "radio_queue.d" "radio_task.d" "ethernet\ArduinoCompatibility.d" "ethernet\Dhcp.d" "ethernet\Dns.d" "ethernet\Ethernet.d" "ethernet\EthernetBonjour.d" "ethernet\EthernetClient.d" "ethernet\EthernetServer.d" "ethernet\EthernetUdp.d" "ethernet\EthernetUtil.d" "ethernet\IPAddress.d" "ethernet\Printfg.d" "ethernet\SPIfg.d" "ethernet\Serial.d" "ethernet\UnitTest.d" "ethernet\socket.d" "ethernet\w5500.d" "websocket\WebsocketServer.d" 
 	-$(RMDIR) $(GEN_MISC_DIRS__QUOTED)
 	-@echo 'Finished clean'
 	-@echo ' '

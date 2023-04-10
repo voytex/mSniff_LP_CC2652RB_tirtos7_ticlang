@@ -82,6 +82,7 @@ int main(void)
     // DASH TASK =====
     Task_Params_init(&Dashboard_taskParams);
     Dashboard_taskParams.priority = 2;
+    Dashboard_taskParams.stackSize = 2048;
     Dashboard_taskHandle = Task_create((Task_FuncPtr)Dashboard_mainTask, &Dashboard_taskParams, NULL);
 
 

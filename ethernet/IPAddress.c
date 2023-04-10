@@ -24,6 +24,7 @@
 
 #include "IPAddress.h"
 #include <stdio.h>
+#include <string.h>
 
 
 void IPAddress_Init_str(IPAddress* ip, uint8_t* address)
@@ -79,7 +80,37 @@ int IPAddress_fromString(IPAddress* ip, const char *address)
     return 1;
 }
 
-
+/*
+ * @param strIp HAS TO BE at least 15 bytes long
+ * since this func writes from right to left.
+ */
 void IPAddress_toString(IPAddress ip, char* strIP) {
-	sprintf(strIP, "%u.%u.%u.%u", ip.bytes[0], ip.bytes[1], ip.bytes[2], ip.bytes[3]);
+//    char* write = *strIP + 14;
+//    uint8_t offset = 0;
+//	uint8_t i, j;
+//
+//	for (j = 4; j > 0; j--) {
+//	    char c = ip.bytes[j-1];
+//	    if (c < 10) {
+//	        *(write--) = (uint8_t)(c + '0');
+//	        *(write--) = '.';
+//	        offset += 2;
+//	    } else if (c < 100) {
+//	        for (i = 0; i < 2; ++i) {
+//	            *(write--) = (uint8_t)((c % 10) + '0');
+//	            c /= 10;
+//	        }
+//	        offset += 1;
+//	        *(write--) = '.';
+//	    } else {
+//	        for (i = 0; i < 3; ++i) {
+//	            *(write--) = (uint8_t)((c % 10) + '0');
+//	            c /= 10;
+//	        }
+//	        if (j != 0) *(write--) = '.';
+//	    }
+//    }
+	//strIP = write + 2;
+	//strIP += 3;
+    sprintf(strIP, "%u.%u.%u.%u\0", ip.bytes[0], ip.bytes[1], ip.bytes[2], ip.bytes[3]);
 }

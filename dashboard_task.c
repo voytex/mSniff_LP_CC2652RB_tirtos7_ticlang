@@ -9,6 +9,7 @@
 #include <ti/sysbios/BIOS.h>
 #include <xdc/runtime/System.h>
 #include <ti/sysbios/knl/Semaphore.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "ethernet/Ethernet.h"
@@ -38,13 +39,13 @@ extern Semaphore_Handle sem_ethernetInit;
 char* readPointer;
 bool readUntil(char *buffer, char delimiter);
 char* moveUntil(char* buffer, char delimiter);
-void handleHttp(EthernetClient* ethClient, char* read_buffer);
+void handleHttp(EthernetClient* hEthClient, char* read_buffer);
 void handleParameterChange(char* parameter, char* value);
 
 const char buffer[] = "Hello world!\0";
-extern const char Html_head[];
-extern const char Html_preamble[];
-extern const char Html_style[];
+//extern const char Html_head[];
+//extern const char Html_preamble[];
+//extern const char Html_style[];
 bool readDestination;
 
 
@@ -98,38 +99,53 @@ void* Dashboard_mainTask(UArg a0, UArg a1)
 }
 
 
-void handleHttp(EthernetClient* ethClient, char* read_buffer) {
+void handleHttp(EthernetClient* hEthClient, char* read_buffer) {
     // HOMEPAGE -----------------------------
     // pocitam POUZE s metodou GET, pak hodnoty vracene formularem
-    System_printf("%s\n", read_buffer);
-
-    //Send HTML
-    EthernetClient_println(ethClient, Html_preamble);
-    EthernetClient_println(ethClient, Html_head);
-    EthernetClient_println(ethClient, Html_style);
-    //EthernetClient_println(ethClient, Html_body);
-    char *ip;
-    Ethernet_getRemoteIp(ip);
-    EthernetClient_println(ethClient, Html_remote_target_start);
-    EthernetClient_println(ethClient, Html_remote_target_ending);
-    EthernetClient_stop(ethClient);
-
-    //cut "HTTP/1.1" substring from the first header line
-    *(strstr(read_buffer, "HTTP")) = '\0';
+    // System_printf("%s\n", read_buffer);
+    *(strstr(read_buffer, " HTTP")) = '\0';
     strtok(read_buffer, "?");
     char* parameter = strtok(NULL, "=");
     char* value = strtok(NULL, "&");
-    while (parameter != NULL){
+    while (parameter != NULL)
+    {
         handleParameterChange(parameter, value);
         parameter = strtok(NULL, "=");
         value = strtok(NULL, "&");
     }
+
+    //Send HTML...
+    //...preamble
+    EthernetClient_println(hEthClient, Html_preamble());
+
+    //...head
+    EthernetClient_println(hEthClient, Html_head());
+
+    //...CSS
+    EthernetClient_println(hEthClient, Html_style());
+
+    //...<section> Network Info
+    EthernetClient_println(hEthClient,
+                           Html_sectionNetworkInfo(Ethernet_getThisMac(),
+                                                   Ethernet_getThisIp(), "NULL\0", "NULL\0"));
+    //...<section> Remote Target
+    EthernetClient_println(hEthClient,
+                           Html_sectionRemoteTarget((const char*)Ethernet_getTargetIp()));
+
+    //...<script>
+    EthernetClient_println(hEthClient, Html_script());
+
+    // TCP FIN ACK
+    EthernetClient_stop(hEthClient);
+
+
 }
 
 void handleParameterChange(char* parameter, char* value) {
     System_printf("%s | %s\n", parameter, value);
-    if (strcmp(parameter, "target_ip") == 0) {
-        Ethernet_setRemoteIp(value);
+    if (strcmp(parameter, "target_ip") == 0)
+    {
+        Ethernet_setTargetIp(value);
     }
 }
 

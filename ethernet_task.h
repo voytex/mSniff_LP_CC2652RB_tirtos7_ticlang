@@ -10,10 +10,12 @@
 
 void* Ethernet_mainTask(UArg a0, UArg a1);
 
-void Ethernet_handleRFpacket();
+void  Ethernet_handleRFpacket();
 
-void Ethernet_setRemoteIp(char*);
-void Ethernet_getRemoteIp(char*);
+void  Ethernet_setTargetIp(char*);
+char* Ethernet_getTargetIp(void);
+char* Ethernet_getThisIp(void);
+char* Ethernet_getThisMac(void);
 
 
 

@@ -14,6 +14,7 @@ SYSCFG_SRCS += \
 C_SRCS += \
 ../dashboard_task.c \
 ../ethernet_task.c \
+../html.c \
 ./syscfg/ti_devices_config.c \
 ./syscfg/ti_radio_config.c \
 ./syscfg/ti_drivers_config.c \
@@ -34,6 +35,7 @@ GEN_MISC_DIRS += \
 C_DEPS += \
 ./dashboard_task.d \
 ./ethernet_task.d \
+./html.d \
 ./syscfg/ti_devices_config.d \
 ./syscfg/ti_radio_config.d \
 ./syscfg/ti_drivers_config.d \
@@ -45,6 +47,7 @@ C_DEPS += \
 OBJS += \
 ./dashboard_task.o \
 ./ethernet_task.o \
+./html.o \
 ./syscfg/ti_devices_config.o \
 ./syscfg/ti_radio_config.o \
 ./syscfg/ti_drivers_config.o \
@@ -68,6 +71,7 @@ GEN_MISC_DIRS__QUOTED += \
 OBJS__QUOTED += \
 "dashboard_task.o" \
 "ethernet_task.o" \
+"html.o" \
 "syscfg\ti_devices_config.o" \
 "syscfg\ti_radio_config.o" \
 "syscfg\ti_drivers_config.o" \
@@ -88,6 +92,7 @@ GEN_MISC_FILES__QUOTED += \
 C_DEPS__QUOTED += \
 "dashboard_task.d" \
 "ethernet_task.d" \
+"html.d" \
 "syscfg\ti_devices_config.d" \
 "syscfg\ti_radio_config.d" \
 "syscfg\ti_drivers_config.d" \
@@ -105,6 +110,7 @@ GEN_FILES__QUOTED += \
 C_SRCS__QUOTED += \
 "../dashboard_task.c" \
 "../ethernet_task.c" \
+"../html.c" \
 "./syscfg/ti_devices_config.c" \
 "./syscfg/ti_radio_config.c" \
 "./syscfg/ti_drivers_config.c" \

@@ -1,5 +1,6 @@
 "./dashboard_task.o"
 "./ethernet_task.o"
+"./html.o"
 "./syscfg/ti_devices_config.o"
 "./syscfg/ti_radio_config.o"
 "./syscfg/ti_drivers_config.o"
