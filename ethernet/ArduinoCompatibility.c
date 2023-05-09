@@ -24,3 +24,7 @@ void delay(unsigned long ms){
     usleep(ms*1000);
 }
 
+unsigned int random() {
+    return 0xdead;
+}
+

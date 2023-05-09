@@ -9,8 +9,9 @@
 #define HTML_H_
 
 
-char* Html_sectionRemoteTarget(const char*, bool);
-char* Html_sectionNetworkInfo(const char*, const char*, const char*, const char*);
+char* Html_sectionNetworkInfo(const char*, const char*, const char*, const char*, const char*);
+char* Html_sectionRemoteTarget(unsigned int, const char*, const char*);
+char* Html_sectionStatistics(uint16_t, uint16_t, uint16_t, uint16_t, int8_t);
 const char* Html_preamble();
 const char* Html_head();
 const char* Html_style();

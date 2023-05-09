@@ -1,6 +1,7 @@
 #include "W5500.h"
 #include "socket.h"
 
+
 //extern "C" {
   #include "string.h"
 //}
@@ -139,10 +140,10 @@ extern "C" {
 		unsigned long start = millis();
 
 		// wait a second for the connection to close
-		usleep(1000);
+		//usleep(1000);
 		// XXX: changed here!
-//		while (EthernetClient_status(eth) != SnSR_CLOSED && millis() - start < 1000)
-//			delay(1);
+		while (EthernetClient_status(eth) != SnSR_CLOSED && millis() - start < 1000)
+			delay(1);
 
 		// if it hasn't closed, close it forcefully
 		if (EthernetClient_status(eth) != SnSR_CLOSED)

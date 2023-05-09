@@ -10,8 +10,7 @@
  */
 
 #include "ti_radio_config.h"
-#include DeviceFamily_constructPath(rf_patches/rf_patch_cpe_bt5.h)
-#include DeviceFamily_constructPath(rf_patches/rf_patch_cpe_ieee_802_15_4.h)
+#include DeviceFamily_constructPath(rf_patches/rf_patch_cpe_multi_protocol.h)
 
 
 // *********************************************************************************
@@ -66,7 +65,7 @@ RF_TxPowerTable_Entry txPowerTable_2400_pa5[TXPOWERTABLE_2400_PA5_SIZE] =
 RF_Mode RF_prop_bt5le1m_0 =
 {
     .rfMode = RF_MODE_AUTO,
-    .cpePatchFxn = &rf_patch_cpe_bt5,
+    .cpePatchFxn = &rf_patch_cpe_multi_protocol,
     .mcePatchFxn = 0,
     .rfePatchFxn = 0
 };
@@ -350,7 +349,7 @@ rfc_CMD_BLE5_GENERIC_RX_t RF_cmdBle5GenericRx_bt5le1m_0 =
 RF_Mode RF_prop_ieee154_1 =
 {
     .rfMode = RF_MODE_AUTO,
-    .cpePatchFxn = &rf_patch_cpe_ieee_802_15_4,
+    .cpePatchFxn = &rf_patch_cpe_multi_protocol,
     .mcePatchFxn = 0,
     .rfePatchFxn = 0
 };

@@ -148,7 +148,7 @@ uint16_t RadioQueue_takePacket(uint8_t* buffer, uint16_t maxlen)
     if (elementLength <= maxlen)
     {
         memcpy(buffer, (uint8_t*)(&RadioQueue_ReadEntry->data + DE_CONFIG_SIZE), elementLength);
-        // TODO 802.15.4 Packets special handling
+        // TODO 802.15.4g Packets special handling
     }
 
     RadioQueue_nextEntry();

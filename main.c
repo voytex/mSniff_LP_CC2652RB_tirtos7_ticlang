@@ -24,6 +24,7 @@
 #include <ti/sysbios/knl/Task.h>
 
 
+
 extern void *Radio_mainTask(UArg a0, UArg a1);
 extern void *Ethernet_mainTask(UArg a0, UArg a1);
 extern void *Dashboard_mainTask(UArg a0, UArg a1);
@@ -71,12 +72,14 @@ int main(void)
 
     // RF TASK =======
     Task_Params_init(&Radio_taskParams);
-    Radio_taskParams.priority = 2;
+    Radio_taskParams.priority = 3;
+    Radio_taskParams.stackSize = 2048;
     Radio_taskHandle = Task_create((Task_FuncPtr)Radio_mainTask, &Radio_taskParams, NULL);
 
     // ETH TASK ======
     Task_Params_init(&Ethernet_taskParams);
     Ethernet_taskParams.priority = 2;
+    Ethernet_taskParams.stackSize = 1024;
     Ethernet_taskHandle = Task_create((Task_FuncPtr)Ethernet_mainTask, &Ethernet_taskParams, NULL);
 
     // DASH TASK =====
