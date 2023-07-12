@@ -21,6 +21,7 @@
 #include <ti/sysbios/knl/Mailbox.h>
 #include DeviceFamily_constructPath(driverlib/rf_ble_mailbox.h)
 
+
 /* Driver configuration */
 #include "ti_drivers_config.h"
 #include "ti_radio_config.h"
